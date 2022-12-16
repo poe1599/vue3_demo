@@ -1,8 +1,8 @@
-import { createPinia } from 'pinia'
 import { createApp } from 'vue'
 import VueDOMPurifyHTML from 'vue-dompurify-html'
 import App from './App.vue'
 import emitter from './plugins/bus'
+import pinia from './plugins/pinia'
 import router from './router'
 
 const app = createApp(App)
@@ -12,7 +12,7 @@ const app = createApp(App)
  */
 app.config.globalProperties.$emitter = emitter
 
-app.use(createPinia())
+app.use(pinia)
 app.use(router)
 app.use(VueDOMPurifyHTML)
 
