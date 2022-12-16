@@ -1,5 +1,5 @@
 <template>
-  <RouterView />
+  <div></div>
 </template>
 <script>
 export default {
@@ -7,3 +7,4 @@ export default {
 }
 </script>
 <script setup></script>
+<style lang="css" src="@/css/normalize.css"></style>
