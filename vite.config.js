@@ -17,6 +17,7 @@ export default defineConfig({
         additionalData: `
           @import "./src/scss/helpers/_variable.scss";
           @import "./src/scss/helpers/_viewport.scss";
+          @import "./src/scss/components/button.scss";
         `,
       },
     },

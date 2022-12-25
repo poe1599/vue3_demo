@@ -12,6 +12,14 @@ const router = createRouter({
       },
     },
     {
+      path: '/demo',
+      name: 'demo',
+      component: () => import('../views/demo.vue'),
+      meta: {
+        layout: 'ExampleLayout',
+      },
+    },
+    {
       path: '/example',
       name: 'index',
       component: () => import('../views/example/example.vue'),
