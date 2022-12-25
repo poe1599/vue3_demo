@@ -10,7 +10,9 @@
   </div>
 
   <div class="example">
+    <h1>Example</h1>
     <PiniaExample v-if="demo === 'Pinia'"></PiniaExample>
+    <SvgExample v-if="demo === 'Svg'"></SvgExample>
   </div>
 </template>
 <script>
@@ -21,11 +23,13 @@ export default {
 <script setup>
 import { computed, reactive } from 'vue'
 import PiniaExample from './components/PiniaExample.vue'
+import SvgExample from './components/SvgExample.vue'
 
 const menuConfig = reactive({
   isOpen: false,
   list: [
     { desc: 'Pinia', isActive: true },
+    { desc: 'Svg', isActive: false },
     // { desc: '', isActive: false },
   ],
 })
@@ -113,7 +117,7 @@ const clickMenuItem = index => {
       cursor: pointer;
 
       &:hover,
-      &[data-active] {
+      &[data-active='true'] {
         background: $menu-bg-hover;
       }
     }

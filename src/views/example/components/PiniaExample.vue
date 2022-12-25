@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Pinia</h1>
+    <h2>Pinia</h2>
     <p>Example: useCounterStore</p>
     <p>counter.count: {{ counter.count }}</p>
     <p>counter.doubleCount: {{ counter.doubleCount }}</p>
