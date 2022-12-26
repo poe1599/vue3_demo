@@ -31,8 +31,15 @@
         <SvgIcon class="icon" name="setting"></SvgIcon>
       </p>
       <p>
-        <img src="@/assets/images/logo.svg" alt="logo">
+        <img src="@/assets/images/logo.svg" alt="logo" />
       </p>
+    </div>
+
+    <div>
+      <h2>SearchInput</h2>
+      <div>
+        <SearchInput></SearchInput>
+      </div>
     </div>
   </div>
 </template>
@@ -40,6 +47,9 @@
 export default {
   name: 'DemoIndex',
 }
+</script>
+<script setup>
+import SearchInput from '@/components/SearchInput.vue'
 </script>
 <style lang="scss" scoped>
 .attractions {
