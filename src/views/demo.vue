@@ -55,6 +55,16 @@
         <AreaSelector v-model="areaVal"></AreaSelector>
       </div>
     </div>
+
+    <div>
+      <h2>InfoCard</h2>
+      <div>
+        <InfoCard type="landscape"></InfoCard>
+        <InfoCard type="activity"></InfoCard>
+        <InfoCard type="restaurant"></InfoCard>
+        <InfoCard type="hotel"></InfoCard>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -65,6 +75,7 @@ export default {
 <script setup>
 import { reactive, ref } from 'vue'
 import AreaSelector from '@/components/AreaSelector.vue'
+import InfoCard from '@/components/InfoCard.vue'
 import Pagination from '@/components/Pagination.vue'
 import SearchInput from '@/components/SearchInput.vue'
 
