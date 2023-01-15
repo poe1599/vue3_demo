@@ -37,4 +37,8 @@ h3 {
 #app {
   font-family: 'Noto Sans TC', serif, monospace;
 }
+
+* {
+  box-sizing: border-box;
+}
 </style>
