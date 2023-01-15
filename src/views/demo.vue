@@ -31,7 +31,14 @@
         <SvgIcon class="icon" name="setting"></SvgIcon>
       </p>
       <p>
-        <img src="@/assets/images/logo.svg" alt="logo">
+        <img src="@/assets/images/logo.svg" alt="logo" />
+      </p>
+    </div>
+
+    <div>
+      <h2>Pagination</h2>
+      <p>
+        <Pagination></Pagination>
       </p>
     </div>
   </div>
@@ -40,6 +47,9 @@
 export default {
   name: 'DemoIndex',
 }
+</script>
+<script setup>
+import Pagination from '@/components/Pagination.vue'
 </script>
 <style lang="scss" scoped>
 .attractions {
