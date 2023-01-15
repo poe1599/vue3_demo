@@ -48,6 +48,13 @@
         <SearchInput></SearchInput>
       </div>
     </div>
+
+    <div>
+      <h2>AreaSelector</h2>
+      <div>
+        <AreaSelector v-model="areaVal"></AreaSelector>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -56,8 +63,12 @@ export default {
 }
 </script>
 <script setup>
+import { reactive, ref } from 'vue'
+import AreaSelector from '@/components/AreaSelector.vue'
 import Pagination from '@/components/Pagination.vue'
 import SearchInput from '@/components/SearchInput.vue'
+
+const areaVal = reactive([])
 </script>
 <style lang="scss" scoped>
 .attractions {

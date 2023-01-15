@@ -21,10 +21,9 @@ export default {
   width: 300px;
 
   &__group {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     padding: 0 12px;
-    width: 100%;
     height: 43px;
     background: $gray;
     border: 1px solid $primary-3;
