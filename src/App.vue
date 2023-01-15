@@ -33,4 +33,8 @@ h2 {
 h3 {
   font-size: 1.5rem; // 24px
 }
+
+#app {
+  font-family: 'Noto Sans TC', serif, monospace;
+}
 </style>

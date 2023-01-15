@@ -41,6 +41,13 @@
         <Pagination></Pagination>
       </p>
     </div>
+
+    <div>
+      <h2>SearchInput</h2>
+      <div>
+        <SearchInput></SearchInput>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -50,6 +57,7 @@ export default {
 </script>
 <script setup>
 import Pagination from '@/components/Pagination.vue'
+import SearchInput from '@/components/SearchInput.vue'
 </script>
 <style lang="scss" scoped>
 .attractions {
