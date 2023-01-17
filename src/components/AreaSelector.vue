@@ -16,9 +16,13 @@
       </button>
     </div>
 
-    <div v-show="!state.isFolded" class="search__menu">
-      <button v-for="i in state.list" :key="i.id" :class="buttonClass(i)" @click="clickOption(i)">{{ i.name }}</button>
-    </div>
+    <transition name="slide--down">
+      <div v-if="!state.isFolded" class="search__menu">
+        <button v-for="i in state.list" :key="i.id" :class="buttonClass(i)" @click="clickOption(i)">
+          {{ i.name }}
+        </button>
+      </div>
+    </transition>
   </div>
 </template>
 <script>
@@ -104,6 +108,7 @@ onClickOutside(AreaSelector, () => {
 </script>
 <style lang="scss" scoped>
 .search {
+  position: relative;
   width: 300px;
 
   &__group {
@@ -160,10 +165,13 @@ onClickOutside(AreaSelector, () => {
   }
 
   &__menu {
+    position: absolute;
     display: flex;
     flex-wrap: wrap;
     padding: 12px;
     gap: 24px;
+    background: $white;
+    box-shadow: $shadow;
 
     .hollowButton,
     .solidButton {
@@ -179,6 +187,20 @@ onClickOutside(AreaSelector, () => {
     line-height: 1;
     gap: 2px;
     margin-right: 4px;
+  }
+}
+
+.slide--down {
+  &-enter-active,
+  &-leave-active {
+    transition-duration: 0.3s;
+    transition-timing-function: cubic-bezier(0.38, 0, 0.24, 1);
+  }
+
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+    transform: translateY(-1rem);
   }
 }
 </style>

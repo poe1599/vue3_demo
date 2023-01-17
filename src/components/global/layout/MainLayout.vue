@@ -1,7 +1,9 @@
 <template>
   <div class="layout">
     <div class="layout__container">
-      <div ref="menu" class="layout__side" :class="{ 'layout__side--open': isMenuOpen }"></div>
+      <div ref="menu" class="layout__side" :class="{ 'layout__side--open': isMenuOpen }">
+        <SideBar></SideBar>
+      </div>
       <div class="layout__main">
         <div class="layout__head">
           <button class="layout__setting" @click="isMenuOpen = !isMenuOpen">
@@ -25,6 +27,7 @@ export default {
 <script setup>
 import { onClickOutside } from '@vueuse/core'
 import { ref } from 'vue'
+import SideBar from '@/components/SideBar.vue'
 
 const isMenuOpen = ref(false)
 const menu = ref(null)
