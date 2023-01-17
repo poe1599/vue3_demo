@@ -86,6 +86,9 @@ $foot-h: 36px;
     text-align: center;
     border-bottom: 1px solid $gray;
     box-shadow: $shadow;
+    @include laptop {
+      display: none;
+    }
 
     img {
       display: block;
@@ -117,6 +120,9 @@ $foot-h: 36px;
     padding: 24px 0 80px;
     width: 100%;
     min-height: calc(100vh - $head-h - $foot-h);
+    @include laptop {
+      min-height: calc(100vh - $foot-h);
+    }
   }
 
   &__foot {
