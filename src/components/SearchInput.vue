@@ -1,8 +1,8 @@
 <template>
   <div class="search">
     <div class="search__group">
-      <input type="text" class="search__input" placeholder="搜尋關鍵字" />
-      <button class="search__clear">
+      <input v-model="_modelValue" type="text" class="search__input" placeholder="搜尋關鍵字" />
+      <button v-show="_modelValue" class="search__clear" @click="_modelValue = ''">
         <SvgIcon name="cross"></SvgIcon>
       </button>
       <span class="search__magnifier">
@@ -15,6 +15,28 @@
 export default {
   name: 'SearchInput',
 }
+</script>
+<script setup>
+import { useVModel } from '@vueuse/core'
+import { watch } from 'vue'
+
+const emits = defineEmits(['update:modelValue', 'inputChange'])
+const props = defineProps({
+  modelValue: {
+    type: String,
+    default: '',
+    required: true,
+  },
+})
+
+const _modelValue = useVModel(props, 'modelValue', emits)
+
+watch(
+  () => _modelValue.value,
+  newValue => {
+    emits('inputChange', newValue)
+  },
+)
 </script>
 <style lang="scss" scoped>
 .search {

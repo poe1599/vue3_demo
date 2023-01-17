@@ -41,4 +41,11 @@ h3 {
 * {
   box-sizing: border-box;
 }
+
+button {
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
 </style>
