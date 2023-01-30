@@ -65,6 +65,17 @@
         <InfoCard type="hotel"></InfoCard>
       </div>
     </div>
+
+    <div>
+      <h2>API</h2>
+      <button class="hollowButton" @click="getScenicSpotData">觀光景點</button>
+      <button class="hollowButton" @click="getRestaurantData">觀光餐飲</button>
+      <button class="hollowButton" @click="getHotelData">觀光旅宿</button>
+      <button class="hollowButton" @click="getActivityData">觀光活動</button>
+      <br />
+      <br />
+      {{ apiData }}
+    </div>
   </div>
 </template>
 <script>
@@ -74,12 +85,35 @@ export default {
 </script>
 <script setup>
 import { reactive, ref } from 'vue'
+import { getActivity, getHotel, getRestaurant, getScenicSpot } from '@/api/request/tourism'
 import AreaSelector from '@/components/AreaSelector.vue'
 import InfoCard from '@/components/InfoCard.vue'
 import Pagination from '@/components/Pagination.vue'
 import SearchInput from '@/components/SearchInput.vue'
 
 const areaVal = reactive([])
+
+const apiData = ref('')
+const getScenicSpotData = async () => {
+  const response = await getScenicSpot({ params: { $top: 1 } })
+  if (!response) return
+  apiData.value = JSON.stringify(response)
+}
+const getRestaurantData = async () => {
+  const response = await getRestaurant({ params: { $top: 1 } })
+  if (!response) return
+  apiData.value = JSON.stringify(response)
+}
+const getHotelData = async () => {
+  const response = await getHotel({ params: { $top: 1 } })
+  if (!response) return
+  apiData.value = JSON.stringify(response)
+}
+const getActivityData = async () => {
+  const response = await getActivity({ params: { $top: 1 } })
+  if (!response) return
+  apiData.value = JSON.stringify(response)
+}
 </script>
 <style lang="scss" scoped>
 .attractions {
