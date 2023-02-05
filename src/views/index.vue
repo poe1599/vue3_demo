@@ -2,85 +2,29 @@
   <div class="page">
     <div class="page__container">
       <div class="page__heroContainer">
-        <img
-          class="page__heroImg"
-          src="https://images.pexels.com/photos/1126386/pexels-photo-1126386.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-          alt="hero image"
-        />
+        <img class="page__heroImg" :src="heroImg?.Picture?.PictureUrl1" :alt="heroImg?.Picture?.PictureDescription1" />
       </div>
     </div>
 
-    <div class="page__container">
+    <div v-for="(i, iIdx) in [scenicSpot, activity, restaurant, hotel]" :key="iIdx" class="page__container">
       <div class="carousel">
         <div class="carousel__head">
           <div class="carousel__title">
             <SvgIcon name="location"></SvgIcon>
-            <h3>熱門景點</h3>
+            <h3>{{ i.title }}</h3>
           </div>
-          <div class="carousel__link">更多熱門景點</div>
+          <!-- todo: 更多XX連結按鈕 -->
+          <div class="carousel__link">{{ i.moreButtonDesc }}</div>
         </div>
         <div class="carousel__body">
           <div class="carousel__wrap">
-            <InfoCard class="carousel__item" type="landscape"></InfoCard>
-            <InfoCard class="carousel__item" type="landscape"></InfoCard>
-            <InfoCard class="carousel__item" type="landscape"></InfoCard>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="page__container">
-      <div class="carousel">
-        <div class="carousel__head">
-          <div class="carousel__title">
-            <SvgIcon name="location"></SvgIcon>
-            <h3>觀光活動</h3>
-          </div>
-          <div class="carousel__link">更多觀光活動</div>
-        </div>
-        <div class="carousel__body">
-          <div class="carousel__wrap">
-            <InfoCard class="carousel__item" type="activity"></InfoCard>
-            <InfoCard class="carousel__item" type="activity"></InfoCard>
-            <InfoCard class="carousel__item" type="activity"></InfoCard>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="page__container">
-      <div class="carousel">
-        <div class="carousel__head">
-          <div class="carousel__title">
-            <SvgIcon name="location"></SvgIcon>
-            <h3>美食品嘗</h3>
-          </div>
-          <div class="carousel__link">更多美食品嘗</div>
-        </div>
-        <div class="carousel__body">
-          <div class="carousel__wrap">
-            <InfoCard class="carousel__item" type="restaurant"></InfoCard>
-            <InfoCard class="carousel__item" type="restaurant"></InfoCard>
-            <InfoCard class="carousel__item" type="restaurant"></InfoCard>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="page__container">
-      <div class="carousel">
-        <div class="carousel__head">
-          <div class="carousel__title">
-            <SvgIcon name="location"></SvgIcon>
-            <h3>住宿推薦</h3>
-          </div>
-          <div class="carousel__link">更多住宿推薦</div>
-        </div>
-        <div class="carousel__body">
-          <div class="carousel__wrap">
-            <InfoCard class="carousel__item" type="hotel"></InfoCard>
-            <InfoCard class="carousel__item" type="hotel"></InfoCard>
-            <InfoCard class="carousel__item" type="hotel"></InfoCard>
+            <InfoCard
+              v-for="j in i.list"
+              :key="j[i.listKey]"
+              class="carousel__item"
+              :info="j"
+              :type="i.cardType"
+            ></InfoCard>
           </div>
         </div>
       </div>
@@ -93,7 +37,80 @@ export default {
 }
 </script>
 <script setup>
+import { computed, onMounted, reactive } from 'vue'
+import { getActivity, getHotel, getRestaurant, getScenicSpot } from '@/api/request/tourism'
 import InfoCard from '@/components/InfoCard.vue'
+
+const getRandom = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min
+}
+
+const getSkipValue = () => {
+  return getRandom(0, 200)
+}
+
+const scenicSpot = reactive({
+  title: '熱門景點',
+  moreButtonDesc: '更多熱門景點',
+  cardType: 'landscape',
+  listKey: 'ScenicSpotID',
+  list: [],
+})
+const getScenicSpotData = async () => {
+  const response = await getScenicSpot({ params: { $top: 3, $skip: getSkipValue() } })
+  scenicSpot.list = response
+}
+
+const activity = reactive({
+  title: '觀光活動',
+  moreButtonDesc: '更多觀光活動',
+  cardType: 'activity',
+  listKey: 'ActivityID',
+  list: [],
+})
+const getActivityData = async () => {
+  const response = await getActivity({ params: { $top: 3, $skip: getSkipValue() } })
+  activity.list = response
+}
+
+const restaurant = reactive({
+  title: '美食品嘗',
+  moreButtonDesc: '更多美食品嘗',
+  cardType: 'restaurant',
+  listKey: 'RestaurantID',
+  list: [],
+})
+const getRestaurantData = async () => {
+  const response = await getRestaurant({ params: { $top: 3, $skip: getSkipValue() } })
+  restaurant.list = response
+}
+
+const hotel = reactive({
+  title: '住宿推薦',
+  moreButtonDesc: '更多住宿推薦',
+  cardType: 'hotel',
+  listKey: 'HotelID',
+  list: [],
+})
+const getHotelData = async () => {
+  const response = await getHotel({ params: { $top: 3, $skip: getSkipValue() } })
+  hotel.list = response
+}
+
+const heroImg = computed(() => {
+  const list = [scenicSpot, activity, restaurant, hotel]
+    .reduce((i, j) => i.concat(j.list), [])
+    .filter(i => i.Picture.PictureUrl1)
+  const randomIndex = getRandom(0, list.length)
+  return list[randomIndex]
+})
+
+onMounted(async () => {
+  await getScenicSpotData()
+  await getRestaurantData()
+  await getHotelData()
+  await getActivityData()
+})
 </script>
 <style lang="scss" scoped>
 @mixin contain {
