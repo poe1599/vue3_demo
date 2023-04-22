@@ -21,3 +21,31 @@ const route = useRoute()
 const layout = computed(() => route.meta.layout)
 </script>
 <style lang="css" src="@/css/normalize.css"></style>
+<style lang="scss">
+h1 {
+  font-size: 3.625rem; // 58px
+}
+
+h2 {
+  font-size: 2.063rem; // 33px
+}
+
+h3 {
+  font-size: 1.5rem; // 24px
+}
+
+#app {
+  font-family: 'Noto Sans TC', serif, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button {
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+</style>
