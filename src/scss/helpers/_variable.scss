@@ -12,29 +12,3 @@ $z-index-tooltip: 1070;
 $fz-l: 1.125rem; // 18px
 $fz: 1rem; // 16px
 $fz-s: 0.875rem; // 14px
-
-%title {
-  font-size: $fz-l;
-  font-weight: bold;
-}
-
-// primary
-$primary-1: #3fb195;
-$primary-2: rgba(63, 177, 149, 0.2);
-$primary-3: rgba(63, 177, 149, 0.08);
-
-// secondary
-$secondary-1: #222;
-$secondary-2: rgba(0, 0, 0, 0.6);
-$secondary-3: rgba(0, 0, 0, 0.38);
-
-// bg
-$white: #fff;
-$gray: #fafafa;
-
-// line
-$line: rgba(0, 0, 0, 0.08);
-
-// box-shadow
-$shadow: 0 14px 24px rgba(0, 0, 0, 0.04);
-$heavy-shadow: 0 14px 24px rgba(0, 0, 0, 0.12);
