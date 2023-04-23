@@ -9,6 +9,7 @@ export default {
 <script setup>
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
+import { useThemeStore } from '@/stores/theme'
 
 /**
  * 共用工具
@@ -19,6 +20,12 @@ const route = useRoute()
  * dynamic layout
  */
 const layout = computed(() => route.meta.layout)
+
+/**
+ * theme
+ */
+const { initTheme } = useThemeStore()
+initTheme()
 </script>
 <style lang="css" src="@/css/normalize.css"></style>
 <style lang="scss">

@@ -1,3 +1,10 @@
+/* eslint-disable vue/no-reserved-component-names */
+// Primevue
+import Button from 'primevue/button'
+import PrimeVue from 'primevue/config'
+import 'primevue/resources/primevue.min.css'
+import 'primeicons/primeicons.css'
+
 import { createApp } from 'vue'
 import VueDOMPurifyHTML from 'vue-dompurify-html'
 import App from './App.vue'
@@ -33,6 +40,9 @@ const init = async vueApp => {
   vueApp.use(router)
   vueApp.use(VueDOMPurifyHTML)
   vueApp.use(pinia)
+  vueApp.use(PrimeVue)
+
+  vueApp.component('Button', Button)
 
   vueApp.mount('#app')
 }
