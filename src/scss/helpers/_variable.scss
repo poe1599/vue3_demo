@@ -9,6 +9,28 @@ $z-index-popover: 1060;
 $z-index-tooltip: 1070;
 
 // font-size
-$fz-l: 1.125rem; // 18px
-$fz: 1rem; // 16px
-$fz-s: 0.875rem; // 14px
+// $fz-xl: 1.25rem; // 20px
+// $fz-l: 1.125rem; // 18px
+// $fz-m: 1rem; // 16px
+// $fz-s: 0.875rem; // 14px
+// $fz-xs: 0.75rem; // 12px
+
+:root[data-theme='light'] {
+  // --color-text: #0e0c0c;
+  // --color-bg: #e5e5e5;
+}
+
+:root[data-theme='dark'] {
+  // --color-text: #bfbfbf;
+  // --color-bg: #232323;
+}
+
+// PrimeVue color
+// https://primevue.org/colors/
+
+html {
+  color: var(--text-color);
+  background: var(--surface-ground);
+  transform: color, background-color;
+  transition: 0.5s;
+}
