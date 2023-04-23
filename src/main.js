@@ -2,6 +2,7 @@
 // Primevue
 import Button from 'primevue/button'
 import PrimeVue from 'primevue/config'
+import InputSwitch from 'primevue/inputswitch'
 import 'primevue/resources/primevue.min.css'
 import 'primeicons/primeicons.css'
 
@@ -43,6 +44,7 @@ const init = async vueApp => {
   vueApp.use(PrimeVue)
 
   vueApp.component('Button', Button)
+  vueApp.component('InputSwitch', InputSwitch)
 
   vueApp.mount('#app')
 }
