@@ -1,13 +1,15 @@
 <template>
   <header class="header">
-    <router-link class="header__logo" :to="{ name: 'index' }"></router-link>
-    <div class="header__group">
-      <nav class="header__nav">
-        <router-link class="header__link" :to="{ name: 'index' }">探索景點</router-link>
-        <router-link class="header__link" :to="{ name: 'index' }">探索景點</router-link>
-        <router-link class="header__link" :to="{ name: 'index' }">探索景點</router-link>
-      </nav>
-      <ThemeSwitch></ThemeSwitch>
+    <div class="header__container">
+      <router-link class="header__logo" :to="{ name: 'index' }"></router-link>
+      <div class="header__group">
+        <nav class="header__nav">
+          <router-link class="header__link" :to="{ name: 'index' }">探索景點</router-link>
+          <router-link class="header__link" :to="{ name: 'index' }">探索景點</router-link>
+          <router-link class="header__link" :to="{ name: 'index' }">探索景點</router-link>
+        </nav>
+        <ThemeSwitch></ThemeSwitch>
+      </div>
     </div>
   </header>
 
@@ -48,9 +50,6 @@ const menuIcon = computed(() => `pi ${isMenuOpen.value ? 'pi-times' : 'pi-align-
 </script>
 <style lang="scss" scoped>
 .header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 0.5rem;
   width: 100%;
   height: 4rem;
@@ -59,10 +58,22 @@ const menuIcon = computed(() => `pi ${isMenuOpen.value ? 'pi-times' : 'pi-align-
     position: fixed;
     top: 0;
     left: 0;
-    justify-content: space-between;
     padding: 0.5rem 3rem;
     height: 5rem;
     border-bottom: 1px solid var(--surface-border);
+    z-index: $z-index-fixed;
+  }
+
+  &__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    @include crosswise {
+      justify-content: space-between;
+      margin: auto;
+      max-width: var(--crosswise-container-max-width);
+    }
   }
 
   &__logo {
@@ -70,6 +81,7 @@ const menuIcon = computed(() => `pi ${isMenuOpen.value ? 'pi-times' : 'pi-align-
     height: 1.875rem;
     background-color: var(--primary-color);
     mask: url('@/assets/images/logo.svg') no-repeat center;
+    mask-size: contain;
   }
 
   &__group {
@@ -162,6 +174,7 @@ const menuIcon = computed(() => `pi ${isMenuOpen.value ? 'pi-times' : 'pi-align-
     height: 1.875rem;
     background-color: var(--primary-color);
     mask: url('@/assets/images/logo.svg') no-repeat center;
+    mask-size: contain;
   }
 
   &__nav {

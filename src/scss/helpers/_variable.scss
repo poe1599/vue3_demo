@@ -34,3 +34,24 @@ html {
   transform: color, background-color;
   transition: 0.5s;
 }
+
+:root {
+  --section-padding-y: 1rem;
+  --section-padding-x: 1rem;
+  --crosswise-section-padding-y: 2rem;
+  --crosswise-section-padding-x: 2rem;
+  --crosswise-container-max-width: 1200px;
+}
+
+@mixin base-section {
+  position: relative;
+  padding: var(--section-padding-y) var(--section-padding-x);
+  width: 100%;
+  @include crosswise {
+    margin: auto;
+    padding: var(--crosswise-section-padding-y) var(--crosswise-section-padding-x);
+    max-width: var(--crosswise-container-max-width);
+  }
+}
+
+$fake-bg-color: rgb(190, 190, 190);
