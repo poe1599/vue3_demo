@@ -2,7 +2,9 @@
 // Primevue
 import Button from 'primevue/button'
 import PrimeVue from 'primevue/config'
+import Dropdown from 'primevue/dropdown'
 import InputSwitch from 'primevue/inputswitch'
+import InputText from 'primevue/inputtext'
 import 'primevue/resources/primevue.min.css'
 import 'primeicons/primeicons.css'
 
@@ -44,7 +46,9 @@ const init = async vueApp => {
   vueApp.use(PrimeVue)
 
   vueApp.component('Button', Button)
+  vueApp.component('Dropdown', Dropdown)
   vueApp.component('InputSwitch', InputSwitch)
+  vueApp.component('InputText', InputText)
 
   vueApp.mount('#app')
 }
