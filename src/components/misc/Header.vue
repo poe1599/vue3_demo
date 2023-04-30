@@ -49,6 +49,11 @@ const toggleMenuOpen = () => {
 const menuIcon = computed(() => `pi ${isMenuOpen.value ? 'pi-times' : 'pi-align-right'}`)
 </script>
 <style lang="scss" scoped>
+@mixin sidebar-transition {
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+}
+
 .header {
   padding: 0.5rem;
   width: 100%;
@@ -117,17 +122,12 @@ const menuIcon = computed(() => `pi ${isMenuOpen.value ? 'pi-times' : 'pi-align-
 .sideBarGroup {
   position: fixed;
   top: 0;
-  left: 100%;
+  left: 0;
   width: 100%;
   height: 100%;
   z-index: $z-index-fixed - 1;
-  transition-duration: 0.3s;
   @include crosswise {
     display: none;
-  }
-
-  &--isOpen {
-    left: 0;
   }
 
   &__modal {
@@ -138,6 +138,9 @@ const menuIcon = computed(() => `pi ${isMenuOpen.value ? 'pi-times' : 'pi-align-
     height: 100%;
     background: rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(2px);
+    opacity: 0;
+    pointer-events: none;
+    @include sidebar-transition;
   }
 
   &__menuButton {
@@ -155,12 +158,13 @@ const menuIcon = computed(() => `pi ${isMenuOpen.value ? 'pi-times' : 'pi-align-
 .sideBar {
   position: absolute;
   top: 0;
-  right: 0;
+  right: -100%;
   overflow: hidden;
   padding-bottom: 2rem;
   width: 17.25rem;
   background: var(--surface-section);
   border-radius: 0 0 0 1rem;
+  @include sidebar-transition;
 
   &__head {
     display: flex;
@@ -203,6 +207,19 @@ const menuIcon = computed(() => `pi ${isMenuOpen.value ? 'pi-times' : 'pi-align-
   &__foot {
     padding: 0 0.5rem;
     text-align: center;
+  }
+}
+
+.sideBarGroup--isOpen {
+  .sideBarGroup {
+    &__modal {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  .sideBar {
+    right: 0;
   }
 }
 </style>
