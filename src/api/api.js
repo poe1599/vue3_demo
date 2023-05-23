@@ -22,8 +22,8 @@ const checkToken = async () => {
   const getAuthorizationFromStorage = () => {
     const tokenObj = JSON.parse(localStorage.getItem(VITE_SYS_KEY))
     const { access_token, token_type } = tokenObj
-    const authorization = `${token_type} ${access_token}`
-    return authorization
+    const Authorization = `${token_type} ${access_token}`
+    return Authorization
   }
 
   // 從取用 API 取得新的 authorization
@@ -37,13 +37,13 @@ const checkToken = async () => {
     const expiredTime = timestampNow + expires_in * 1000 - advanceTime
     localStorage.setItem(VITE_SYS_KEY, JSON.stringify({ ...response, expiredTime }))
 
-    const authorization = `${token_type} ${access_token}`
-    return authorization
+    const Authorization = `${token_type} ${access_token}`
+    return Authorization
   }
 
   const isTokenExpired = checkTokenIsExpired()
-  if (isTokenExpired) await getAuthorizationFromApi()
-  else getAuthorizationFromStorage()
+  const getAuthFn = isTokenExpired ? getAuthorizationFromApi : getAuthorizationFromStorage
+  return await getAuthFn()
 }
 
 const injectRequest = async (apiConfig, callCheck = true) => {
@@ -51,8 +51,8 @@ const injectRequest = async (apiConfig, callCheck = true) => {
     const { url, data, params, headers = {}, method, timeout, baseURL } = apiConfig
 
     if (callCheck) {
-      const authorization = await checkToken()
-      Object.assign(headers, { authorization })
+      const Authorization = await checkToken()
+      Object.assign(headers, { Authorization })
     }
 
     const requestConfig = {
@@ -110,7 +110,5 @@ const api = {
     })
   },
 }
-
-
 
 export default api
