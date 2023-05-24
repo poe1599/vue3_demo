@@ -126,6 +126,7 @@ const menuIcon = computed(() => `pi ${isMenuOpen.value ? 'pi-times' : 'pi-align-
   width: 100%;
   height: 100%;
   z-index: $z-index-fixed - 1;
+  pointer-events: none;
   @include crosswise {
     display: none;
   }
@@ -148,6 +149,7 @@ const menuIcon = computed(() => `pi ${isMenuOpen.value ? 'pi-times' : 'pi-align-
     top: 0.5rem;
     right: 0.5rem;
     height: 3rem;
+    pointer-events: auto;
 
     :deep(.pi) {
       font-size: 1.25rem;
@@ -164,6 +166,7 @@ const menuIcon = computed(() => `pi ${isMenuOpen.value ? 'pi-times' : 'pi-align-
   width: 17.25rem;
   background: var(--surface-section);
   border-radius: 0 0 0 1rem;
+  pointer-events: auto;
   @include sidebar-transition;
 
   &__head {
