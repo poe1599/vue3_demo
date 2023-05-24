@@ -2,7 +2,7 @@
   <BaseSectionTemplate :data="data">
     <div class="B-info1">
       <div class="B-info1__wrap">
-        <HorizontalCard v-for="i in data.list" :key="i.key" class="B-info1__card"></HorizontalCard>
+        <HorizontalCard v-for="i in data.list" :key="i.key" :data="i" class="B-info1__card"></HorizontalCard>
       </div>
     </div>
   </BaseSectionTemplate>
@@ -24,10 +24,13 @@ const props = defineProps({
 })
 </script>
 <style lang="scss" scoped>
-$card-gap: 0.5rem;
-
 .B-info1 {
+  --card-gap: 0.5rem;
+
   padding: 0 var(--section-padding-x);
+  @include tablet {
+    --card-gap: 1rem;
+  }
   @include crosswise {
     padding: 0;
   }
@@ -36,7 +39,7 @@ $card-gap: 0.5rem;
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: $card-gap;
+    gap: var(--card-gap);
     @include crosswise {
       flex-flow: row wrap;
     }
@@ -45,7 +48,7 @@ $card-gap: 0.5rem;
   &__card {
     width: 100%;
     @include crosswise {
-      width: calc((100% - $card-gap) / 2);
+      width: calc((100% - var(--card-gap)) / 2);
     }
   }
 }

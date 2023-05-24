@@ -7,15 +7,53 @@ export default {
 }
 </script>
 <script setup>
+import dayjs from 'dayjs'
 import { onMounted, reactive } from 'vue'
+import { getActivity } from '@/api/request/tourism'
 import SectionTemplate1 from '@/components/section/SectionTemplate1.vue'
+import getRandom from '@/plugins/getRandom'
+import mockData from '@/views/HomePage/components/mockActivity'
 
 const activityData = reactive({
   title: '近期活動',
   linkText: '查看更多活動',
   afterClickLink: () => {},
+  list: [],
 })
 
-onMounted(async () => {})
+const getActivityData = async () => {
+  const $skip = getRandom(0, 500)
+  const response = await getActivity({ params: { $skip, $top: 12 } })
+  if (!response) {
+    // mock
+    activityData.list = mockData
+    return
+  }
+
+  activityData.list.push(...response)
+}
+
+const formatData = () => {
+  activityData.list = activityData.list
+    .filter(i => i.Picture.PictureUrl1)
+    .filter((i, iIdx) => iIdx < 4)
+    .map(i => {
+      return {
+        key: i.ActivityID,
+        img: i.Picture.PictureUrl1,
+        alt: i.Picture.PictureDescription1,
+        startTime: dayjs(i.StartTime).format('YYYY/MM/DD'),
+        endTime: dayjs(i.EndTime).format('YYYY/MM/DD'),
+        title: i.ActivityName,
+        description: i.Description,
+        address: i.Address,
+      }
+    })
+}
+
+onMounted(async () => {
+  await getActivityData()
+  formatData()
+})
 </script>
 <style lang="scss" scoped></style>
