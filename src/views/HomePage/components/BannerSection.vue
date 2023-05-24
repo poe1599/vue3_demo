@@ -11,7 +11,7 @@
       :loop="true"
       class="S-banner__swiper"
     >
-      <swiper-slide v-for="i in BannerList" :key="i.ScenicSpotID">
+      <swiper-slide v-for="i in BannerData.list" :key="i.ScenicSpotID">
         <div class="S-banner__slide">
           <img class="S-banner__img" :src="i.Picture.PictureUrl1" :alt="i.Picture.PictureDescription1" />
           <figcaption class="S-banner__fig">{{ i.ScenicSpotName }}</figcaption>
@@ -37,22 +37,29 @@ import { getScenicSpot } from '@/api/request/tourism'
 import getRandom from '@/plugins/getRandom'
 import mockData from '@/views/HomePage/components/mockBanner'
 
-const BannerList = reactive([])
+const BannerData = reactive({
+  list: [],
+})
 
 const getScenicSpotBannerData = async () => {
   const $skip = getRandom(0, 500)
   const response = await getScenicSpot({ params: { $skip, $top: 30 } })
-  if (!response) return
+  if (!response) {
+    // mock
+    BannerData.list.push(...mockData)
+    return
+  }
 
-  const list = response.filter(i => i.Picture.PictureUrl1).filter((i, iIdx) => iIdx < 10)
-  BannerList.push(...list)
+  BannerData.list.push(...response)
+}
 
-  // // mock
-  // BannerList.push(...mockData)
+const formateData = () => {
+  BannerData.list = BannerData.list.filter(i => i.Picture.PictureUrl1).filter((i, iIdx) => iIdx < 10)
 }
 
 onMounted(async () => {
   await getScenicSpotBannerData()
+  formateData()
 })
 </script>
 <style lang="scss" scoped>
