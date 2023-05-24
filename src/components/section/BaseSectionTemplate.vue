@@ -1,9 +1,9 @@
 <template>
   <section class="T-section">
     <div class="T-section__head">
-      <h3 class="T-section__title">{{ title }}</h3>
-      <div class="T-section__more" @click="afterClickLink">
-        {{ linkText }}
+      <h3 class="T-section__title">{{ data.title }}</h3>
+      <div class="T-section__more" @click="data.afterClickLink">
+        {{ data.linkText }}
         <i class="pi pi-chevron-right"></i>
       </div>
     </div>
@@ -20,17 +20,9 @@ export default {
 </script>
 <script setup>
 const props = defineProps({
-  title: {
-    type: String,
-    default: '',
-  },
-  linkText: {
-    type: String,
-    default: '',
-  },
-  afterClickLink: {
-    type: Function,
-    default: () => {},
+  data: {
+    type: Object,
+    default: () => ({}),
   },
 })
 </script>

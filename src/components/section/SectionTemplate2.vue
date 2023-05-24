@@ -1,5 +1,5 @@
 <template>
-  <BaseSectionTemplate :title="title" :link-text="linkText" :after-click-link="afterClickLink">
+  <BaseSectionTemplate :data="data">
     <swiper
       :slides-per-view="1.2"
       :space-between="16"
@@ -35,17 +35,9 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
 const props = defineProps({
-  title: {
-    type: String,
-    default: '',
-  },
-  linkText: {
-    type: String,
-    default: '',
-  },
-  afterClickLink: {
-    type: Function,
-    default: () => {},
+  data: {
+    type: Object,
+    default: () => ({}),
   },
 })
 </script>

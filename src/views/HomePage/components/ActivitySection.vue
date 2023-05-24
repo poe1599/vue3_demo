@@ -1,5 +1,5 @@
 <template>
-  <SectionTemplate1 :title="'近期活動'" :link-text="'查看更多活動'" :after-click-link="() => {}"></SectionTemplate1>
+  <SectionTemplate1 :data="activityData"></SectionTemplate1>
 </template>
 <script>
 export default {
@@ -7,6 +7,15 @@ export default {
 }
 </script>
 <script setup>
+import { onMounted, reactive } from 'vue'
 import SectionTemplate1 from '@/components/section/SectionTemplate1.vue'
+
+const activityData = reactive({
+  title: '近期活動',
+  linkText: '查看更多活動',
+  afterClickLink: () => {},
+})
+
+onMounted(async () => {})
 </script>
 <style lang="scss" scoped></style>

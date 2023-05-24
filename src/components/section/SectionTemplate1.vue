@@ -1,8 +1,8 @@
 <template>
-  <BaseSectionTemplate :title="title" :link-text="linkText" :after-click-link="afterClickLink">
+  <BaseSectionTemplate :data="data">
     <div class="B-info1">
       <div class="B-info1__wrap">
-        <HorizontalCard v-for="i in 4" :key="i" class="B-info1__card"></HorizontalCard>
+        <HorizontalCard v-for="i in data.list" :key="i.key" class="B-info1__card"></HorizontalCard>
       </div>
     </div>
   </BaseSectionTemplate>
@@ -17,17 +17,9 @@ import HorizontalCard from '@/components/card/HorizontalCard.vue'
 import BaseSectionTemplate from '@/components/section/BaseSectionTemplate.vue'
 
 const props = defineProps({
-  title: {
-    type: String,
-    default: '',
-  },
-  linkText: {
-    type: String,
-    default: '',
-  },
-  afterClickLink: {
-    type: Function,
-    default: () => {},
+  data: {
+    type: Object,
+    default: () => ({}),
   },
 })
 </script>
