@@ -2,7 +2,7 @@
   <router-link to="" class="H-card">
     <div class="H-card__container">
       <div class="H-card__pic">
-        <img class="H-card__img" :src="data.img" :alt="data.alt" />
+        <img class="H-card__img" loading="lazy" :src="data.img" :alt="data.alt" />
       </div>
       <div class="H-card__info">
         <p class="H-card__time">
@@ -12,7 +12,7 @@
         </p>
         <p class="H-card__title">{{ data.title }}</p>
         <p class="H-card__desc">{{ data.description }}</p>
-        <address class="H-card__address">{{ data.address }}</address>
+        <address class="H-card__address"><i class="pi pi-compass"></i>{{ data.address }}</address>
       </div>
     </div>
   </router-link>
@@ -39,7 +39,6 @@ const props = defineProps({
   overflow: hidden;
   text-decoration: none;
   color: var(--surface-900);
-  cursor: pointer;
   @include tablet {
     --img-x: 12rem;
     --img-y: 9rem;
@@ -77,7 +76,6 @@ const props = defineProps({
   }
 
   &__info {
-    position: relative;
     padding: 0.25rem 1rem;
     width: calc(100% - var(--img-x));
     height: var(--img-y);
@@ -148,8 +146,12 @@ const props = defineProps({
     font-style: normal;
     color: var(--surface-700);
     @include tablet {
-      bottom: 0.25rem;
       font-size: 1rem;
+    }
+
+    .pi {
+      vertical-align: top;
+      margin-right: 0.5rem;
     }
   }
 }

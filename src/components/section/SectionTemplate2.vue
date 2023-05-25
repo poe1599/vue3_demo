@@ -9,13 +9,17 @@
       :modules="[Pagination, Navigation]"
       class="B-swiper"
     >
-      <swiper-slide v-for="i in 4" :key="i">
-        <VerticalCard class="B-swiper__slide"></VerticalCard>
+      <swiper-slide v-for="i in data.list" :key="i.key">
+        <div class="B-swiper__slide">
+          <VerticalCard :data="i"></VerticalCard>
+        </div>
       </swiper-slide>
     </swiper>
     <div class="B-info">
       <div class="B-info__wrap">
-        <VerticalCard v-for="i in 4" :key="i" class="B-info__card"></VerticalCard>
+        <div v-for="i in data.list" :key="i.key" class="B-info__card">
+          <VerticalCard :data="i"></VerticalCard>
+        </div>
       </div>
     </div>
   </BaseSectionTemplate>
@@ -46,6 +50,10 @@ const props = defineProps({
   @include crosswise {
     display: none;
   }
+
+  &__slide {
+    padding-bottom: 2rem;
+  }
 }
 
 .B-info {
@@ -61,7 +69,8 @@ const props = defineProps({
   }
 
   &__card {
-    flex: 1 1 auto;
+    flex: 1 0 auto;
+    width: 20%;
   }
 }
 </style>
