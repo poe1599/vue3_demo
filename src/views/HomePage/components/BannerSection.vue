@@ -39,27 +39,38 @@ import getRandom from '@/plugins/getRandom'
 
 const BannerData = reactive({
   list: [],
+  isUsedMock: false,
 })
 
 const getScenicSpotBannerData = async () => {
+  if (BannerData.isUsedMock) return
+
   const $skip = getRandom(0, 500)
-  const response = await getScenicSpot({ params: { $skip, $top: 30 } })
+  const response = await getScenicSpot({ params: { $skip, $top: 50 } })
   if (!response) {
     // mock
     BannerData.list = mockScenicSpot
+    BannerData.isUsedMock = true
+    filterData()
     return
   }
 
   BannerData.list = response
+  filterData()
 }
 
-const formateData = () => {
-  BannerData.list = BannerData.list.filter(i => i.Picture.PictureUrl1).filter((i, iIdx) => iIdx < 10)
+const filterData = async () => {
+  const displayNum = 10
+  BannerData.list = BannerData.list.filter(i => i.Picture.PictureUrl1).filter((i, iIdx) => iIdx < displayNum)
+  const shouldRefreshData = BannerData.list.length < displayNum && !BannerData.isUsedMock
+  if (shouldRefreshData) await getScenicSpotBannerData()
+  else formatData()
 }
+
+const formatData = () => {}
 
 onMounted(async () => {
   await getScenicSpotBannerData()
-  formateData()
 })
 </script>
 <style lang="scss" scoped>
