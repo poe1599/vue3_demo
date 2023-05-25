@@ -11,8 +11,8 @@ import dayjs from 'dayjs'
 import { onMounted, reactive } from 'vue'
 import { getActivity } from '@/api/request/tourism'
 import SectionTemplate1 from '@/components/section/SectionTemplate1.vue'
+import mockActivity from '@/mock/mockActivity'
 import getRandom from '@/plugins/getRandom'
-import mockData from '@/views/HomePage/components/mockActivity'
 
 const activityData = reactive({
   title: '近期活動',
@@ -26,11 +26,11 @@ const getActivityData = async () => {
   const response = await getActivity({ params: { $skip, $top: 12 } })
   if (!response) {
     // mock
-    activityData.list = mockData
+    activityData.list = mockActivity
     return
   }
 
-  activityData.list.push(...response)
+  activityData.list = response
 }
 
 const formatData = () => {

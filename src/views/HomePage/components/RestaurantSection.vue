@@ -10,8 +10,8 @@ export default {
 import { onMounted, reactive } from 'vue'
 import { getRestaurant } from '@/api/request/tourism'
 import SectionTemplate2 from '@/components/section/SectionTemplate2.vue'
+import mockRestaurant from '@/mock/mockRestaurant'
 import getRandom from '@/plugins/getRandom'
-import mockData from '@/views/HomePage/components/mockRestaurant'
 
 const restaurantData = reactive({
   title: '一再回訪美食',
@@ -25,7 +25,7 @@ const getRestaurantData = async () => {
   const response = await getRestaurant({ params: { $skip, $top: 20 } })
   if (!response) {
     // mock
-    restaurantData.list = mockData
+    restaurantData.list = mockRestaurant
     return
   }
 

@@ -34,8 +34,8 @@ import 'swiper/css/pagination'
 import '@/css/custom-swiper.css'
 import { onMounted, reactive } from 'vue'
 import { getScenicSpot } from '@/api/request/tourism'
+import mockScenicSpot from '@/mock/mockScenicSpot'
 import getRandom from '@/plugins/getRandom'
-import mockData from '@/views/HomePage/components/mockBanner'
 
 const BannerData = reactive({
   list: [],
@@ -46,11 +46,11 @@ const getScenicSpotBannerData = async () => {
   const response = await getScenicSpot({ params: { $skip, $top: 30 } })
   if (!response) {
     // mock
-    BannerData.list.push(...mockData)
+    BannerData.list = mockScenicSpot
     return
   }
 
-  BannerData.list.push(...response)
+  BannerData.list = response
 }
 
 const formateData = () => {

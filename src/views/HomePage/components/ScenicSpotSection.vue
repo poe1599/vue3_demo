@@ -10,8 +10,8 @@ export default {
 import { onMounted, reactive } from 'vue'
 import { getScenicSpot } from '@/api/request/tourism'
 import SectionTemplate2 from '@/components/section/SectionTemplate2.vue'
+import mockActivity from '@/mock/mockActivity'
 import getRandom from '@/plugins/getRandom'
-import mockData from '@/views/HomePage/components/mockActivity'
 
 const scenicSpotData = reactive({
   title: '熱門打卡景點',
@@ -25,7 +25,7 @@ const getScenicSpotData = async () => {
   const response = await getScenicSpot({ params: { $skip, $top: 20 } })
   if (!response) {
     // mock
-    scenicSpotData.list = mockData
+    scenicSpotData.list = mockActivity
     return
   }
 
