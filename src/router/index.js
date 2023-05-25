@@ -6,11 +6,19 @@ const router = createRouter({
     {
       path: '/',
       name: 'index',
-      component: () => import('../views/index.vue'),
+      component: () => import('../views/HomePage/index.vue'),
       meta: {
-        layout: 'MainLayout',
+        layout: 'HomeLayout',
       },
     },
+    // {
+    //   path: '/example',
+    //   name: 'example',
+    //   component: () => import('../views/example.vue'),
+    //   meta: {
+    //     layout: 'MainLayout',
+    //   },
+    // },
     {
       path: '/:catchAll(.*)',
       redirect: { name: 'index' },
