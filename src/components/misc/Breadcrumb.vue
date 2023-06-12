@@ -20,6 +20,8 @@ const props = defineProps({
 </script>
 <style lang="scss" scoped>
 .breadcrumb {
+  @include base-section;
+
   &__link {
     font-size: 0.75rem;
     text-decoration: none;

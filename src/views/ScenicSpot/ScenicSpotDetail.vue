@@ -30,7 +30,7 @@ const ScenicSpot = reactive({
     { name: 'index', text: '節慶活動' },
   ],
   data: {},
-  oriData: {},
+  picSection: {},
 })
 
 const getData = async () => {
@@ -40,18 +40,37 @@ const getData = async () => {
   formatData(response[0])
 }
 
-const formatData = oriData => {
-  Object.assign(ScenicSpot.oriData, oriData)
-  const data = {}
+const formatData = data => {
   Object.assign(ScenicSpot.data, data)
+  formatPicSection()
   ScenicSpot.isLoading = false
+}
+
+const formatPicSection = () => {
+  const picSection = {
+    list: [],
+  }
+
+  const { PictureUrl1, PictureDescription1, PictureUrl2, PictureDescription2, PictureUrl3, PictureDescription3 } =
+    ScenicSpot.data.Picture
+
+  if (PictureUrl1)
+    picSection.list.push({ id: 'PictureUrl1', name: PictureDescription1, desc: PictureDescription1, url: PictureUrl1 })
+
+  if (PictureUrl2)
+    picSection.list.push({ id: 'PictureUrl2', name: PictureDescription2, desc: PictureDescription2, url: PictureUrl2 })
+
+  if (PictureUrl3)
+    picSection.list.push({ id: 'PictureUrl3', name: PictureDescription3, desc: PictureDescription3, url: PictureUrl3 })
+
+  Object.assign(ScenicSpot.picSection, picSection)
 }
 
 const updateBreadcrumbs = () => {
   ScenicSpot.breadcrumbs.push({
     name: 'ScenicSpotDetail',
     param: { ScenicSpotID },
-    text: ScenicSpot.oriData.ScenicSpotName,
+    text: ScenicSpot.data.ScenicSpotName,
   })
 }
 

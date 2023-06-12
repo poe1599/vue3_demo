@@ -1,10 +1,10 @@
 <template>
   <article class="P-detail">
     <div class="P-detail__breadcrumb">
-      <Breadcrumb :breadcrumbs="page.breadcrumbs" />
+      <Breadcrumb :breadcrumbs="props.page.breadcrumbs" />
     </div>
     <div class="P-detail__pic">
-      <PicSection />
+      <PicSection :data="props.page.picSection" />
     </div>
     <div class="P-detail__desc">
       <DescSection />
@@ -43,22 +43,22 @@ const router = useRouter()
 </script>
 <style lang="scss" scoped>
 .P-detail {
-  padding: 1.5rem 0;
+  // padding: 1.5rem 0;
 
-  &__breadcrumb {
-    margin: 0 1rem 1rem;
-  }
+  // &__breadcrumb {
+  //   margin: 0 1rem 1rem;
+  // }
 
-  &__pic {
-    margin-bottom: 1rem;
-  }
+  // &__pic {
+  //   margin-bottom: 1rem;
+  // }
 
-  &__desc {
-    margin-bottom: 2rem;
-  }
+  // &__desc {
+  //   margin-bottom: 2rem;
+  // }
 
-  &__map {
-    margin-bottom: 2rem;
-  }
+  // &__map {
+  //   margin-bottom: 2rem;
+  // }
 }
 </style>
