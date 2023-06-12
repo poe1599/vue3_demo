@@ -11,6 +11,12 @@ const router = createRouter({
         layout: 'HomeLayout',
       },
     },
+    {
+      path: '/ScenicSpot/:ScenicSpotID',
+      name: 'ScenicSpotDetail',
+      component: () => import('@/views/ScenicSpot/ScenicSpotDetail.vue'),
+      meta: { layout: 'HomeLayout' },
+    },
     // {
     //   path: '/example',
     //   name: 'example',
