@@ -31,6 +31,7 @@ const ScenicSpot = reactive({
   ],
   data: {},
   picSection: {},
+  descSection: {},
 })
 
 const getData = async () => {
@@ -43,6 +44,7 @@ const getData = async () => {
 const formatData = data => {
   Object.assign(ScenicSpot.data, data)
   formatPicSection()
+  formatDescSection()
   ScenicSpot.isLoading = false
 }
 
@@ -64,6 +66,21 @@ const formatPicSection = () => {
     picSection.list.push({ id: 'PictureUrl3', name: PictureDescription3, desc: PictureDescription3, url: PictureUrl3 })
 
   Object.assign(ScenicSpot.picSection, picSection)
+}
+
+const formatDescSection = () => {
+  const { ScenicSpotName, DescriptionDetail, Class1, Class2, Class3, Keyword } = ScenicSpot.data
+  const tags = [Class1, Class2, Class3].filter(i => i)
+  Keyword?.split(/[,、]/)
+    .map(i => i.trim())
+    .forEach(i => tags.push(i))
+  const descSection = {
+    pageTitle: ScenicSpotName,
+    tags,
+    descTitle: '景點介紹：',
+    desc: DescriptionDetail,
+  }
+  Object.assign(ScenicSpot.descSection, descSection)
 }
 
 const updateBreadcrumbs = () => {

@@ -7,7 +7,7 @@
       <PicSection :data="props.page.picSection" />
     </div>
     <div class="P-detail__desc">
-      <DescSection />
+      <DescSection :data="props.page.descSection" />
     </div>
     <div class="P-detail__map">
       <MapSection />
